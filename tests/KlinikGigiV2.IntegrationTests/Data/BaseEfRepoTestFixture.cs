@@ -1,4 +1,4 @@
-﻿using KlinikGigiV2.Core.ContributorAggregate;
+﻿using KlinikGigiV2.Core.UserAggregate;
 using KlinikGigiV2.Infrastructure.Data;
 
 namespace KlinikGigiV2.IntegrationTests.Data;
@@ -36,8 +36,8 @@ public abstract class BaseEfRepoTestFixture
     return builder.Options;
   }
 
-  protected EfRepository<Contributor> GetRepository()
+  protected EfRepository<User> GetRepository()
   {
-    return new EfRepository<Contributor>(_dbContext);
+    return new EfRepository<User>(_dbContext);
   }
 }
