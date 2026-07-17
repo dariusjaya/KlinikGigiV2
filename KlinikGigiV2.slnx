@@ -1,0 +1,30 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".template.config/template.json" />
+    <File Path="CleanArchitecture.nuspec" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/KlinikGigiV2.Core/KlinikGigiV2.Core.csproj" />
+    <Project Path="src/KlinikGigiV2.Infrastructure/KlinikGigiV2.Infrastructure.csproj" />
+    <Project Path="src/KlinikGigiV2.SharedKernel/KlinikGigiV2.SharedKernel.csproj" />
+    <Project Path="src/KlinikGigiV2.UseCases/KlinikGigiV2.UseCases.csproj" />
+    <Project Path="src/KlinikGigiV2.Web/KlinikGigiV2.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/KlinikGigiV2.FunctionalTests/KlinikGigiV2.FunctionalTests.csproj">
+      <BuildDependency Project="src/KlinikGigiV2.Web/KlinikGigiV2.Web.csproj" />
+    </Project>
+    <Project Path="tests/KlinikGigiV2.IntegrationTests/KlinikGigiV2.IntegrationTests.csproj">
+      <BuildDependency Project="src/KlinikGigiV2.Infrastructure/KlinikGigiV2.Infrastructure.csproj" />
+    </Project>
+    <Project Path="tests/KlinikGigiV2.UnitTests/KlinikGigiV2.UnitTests.csproj" />
+  </Folder>
+</Solution>

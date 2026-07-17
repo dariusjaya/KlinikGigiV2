@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.Result" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KlinikGigiV2.Core\KlinikGigiV2.Core.csproj" />
+    <ProjectReference Include="..\KlinikGigiV2.SharedKernel\KlinikGigiV2.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
