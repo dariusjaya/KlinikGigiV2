@@ -1,7 +1,7 @@
 ﻿using Ardalis.SharedKernel;
-using KlinikGigiV2.Core.ContributorAggregate;
+using KlinikGigiV2.Core.UserAggregate;
 using KlinikGigiV2.Infrastructure;
-using KlinikGigiV2.UseCases.Contributors.Create;
+using KlinikGigiV2.UseCases.Users.Create;
 
 namespace KlinikGigiV2.Web.Configurations;
 
@@ -20,8 +20,8 @@ public static class MediatorConfig
       // Supply any TYPE from each assembly you want scanned (the generator finds the assembly from the type)
       options.Assemblies =
       [
-        typeof(Contributor),                       // Core
-        typeof(CreateContributorCommand),         // UseCases
+        typeof(User),                       // Core
+        typeof(CreateUserCommand),         // UseCases
         typeof(InfrastructureServiceExtensions), // Infrastructure
         typeof(MediatorConfig)                  // Web
       ];

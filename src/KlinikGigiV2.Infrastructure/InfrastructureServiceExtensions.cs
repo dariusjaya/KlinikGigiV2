@@ -1,10 +1,8 @@
 ﻿using KlinikGigiV2.Core.Interfaces;
-using KlinikGigiV2.Core.Services;
 using KlinikGigiV2.Infrastructure.Data;
-using KlinikGigiV2.Infrastructure.Data.Queries;
-using KlinikGigiV2.UseCases.Contributors.List;
-
+using KlinikGigiV2.Infrastructure.Security;
 namespace KlinikGigiV2.Infrastructure;
+
 public static class InfrastructureServiceExtensions
 {
   public static IServiceCollection AddInfrastructureServices(
@@ -18,7 +16,7 @@ public static class InfrastructureServiceExtensions
     // 3. "SqliteConnection" - fallback to SQLite
     bool isWindows = OperatingSystem.IsWindows();
     bool forceSqlServer = Environment.GetEnvironmentVariable("USE_SQL_SERVER") == "true";
-    
+
     string? connectionString = config.GetConnectionString("cleanarchitecture")
                                ?? ((isWindows || forceSqlServer) ? config.GetConnectionString("DefaultConnection") : null)
                                ?? config.GetConnectionString("SqliteConnection");
@@ -30,9 +28,9 @@ public static class InfrastructureServiceExtensions
     services.AddDbContext<AppDbContext>((provider, options) =>
     {
       var eventDispatchInterceptor = provider.GetRequiredService<EventDispatchInterceptor>();
-      
+
       // Use SQL Server if Aspire or DefaultConnection (on Windows or forced) is available, otherwise use SQLite
-      if (config.GetConnectionString("cleanarchitecture") != null || 
+      if (config.GetConnectionString("cleanarchitecture") != null ||
           ((isWindows || forceSqlServer) && config.GetConnectionString("DefaultConnection") != null))
       {
         options.UseSqlServer(connectionString);
@@ -41,15 +39,15 @@ public static class InfrastructureServiceExtensions
       {
         options.UseSqlite(connectionString);
       }
-      
+
       options.AddInterceptors(eventDispatchInterceptor);
     });
 
     services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
-           .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>))
-           .AddScoped<IListContributorsQueryService, ListContributorsQueryService>()
-           .AddScoped<IDeleteContributorService, DeleteContributorService>();
-
+           .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
+    //  .AddScoped<IListContributorsQueryService, ListContributorsQueryService>()
+    //  .AddScoped<IDeleteContributorService, DeleteContributorService>();
+    services.AddScoped<IPasswordHasher, PasswordHasher>();
     logger.LogInformation("{Project} services registered", "Infrastructure");
 
     return services;

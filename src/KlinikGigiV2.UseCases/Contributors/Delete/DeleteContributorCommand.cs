@@ -1,5 +1,5 @@
-﻿using KlinikGigiV2.Core.ContributorAggregate;
+﻿// using KlinikGigiV2.Core.ContributorAggregate;
 
-namespace KlinikGigiV2.UseCases.Contributors.Delete;
+// namespace KlinikGigiV2.UseCases.Contributors.Delete;
 
-public record DeleteContributorCommand(ContributorId ContributorId) : ICommand<Result>;
+// public record DeleteContributorCommand(ContributorId ContributorId) : ICommand<Result>;

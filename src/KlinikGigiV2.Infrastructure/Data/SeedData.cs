@@ -1,30 +1,41 @@
-﻿using KlinikGigiV2.Core.ContributorAggregate;
+﻿using KlinikGigiV2.Core.UserAggregate;
+using Microsoft.EntityFrameworkCore;
 
 namespace KlinikGigiV2.Infrastructure.Data;
 
 public static class SeedData
 {
-  public const int NUMBER_OF_CONTRIBUTORS = 27; // including the 2 below
-  public static readonly Contributor Contributor1 = new(ContributorName.From("Ardalis"));
-  public static readonly Contributor Contributor2 = new(ContributorName.From("Ilyana"));
-
   public static async Task InitializeAsync(AppDbContext dbContext)
   {
-    if (await dbContext.Contributors.AnyAsync()) return; // DB has been seeded
+    if (await dbContext.Users.AnyAsync())
+      return;
 
     await PopulateTestDataAsync(dbContext);
   }
 
   public static async Task PopulateTestDataAsync(AppDbContext dbContext)
   {
-    dbContext.Contributors.AddRange([Contributor1, Contributor2]);
-    await dbContext.SaveChangesAsync();
+    var perawat = User.Create(
+        fullName: "Administrator",
+        email: "admin@klinik.com",
+        passwordHash: "Admin123!"
+    );
 
-    // add a bunch more contributors to support demonstrating paging
-    for (int i = 1; i <= NUMBER_OF_CONTRIBUTORS-2; i++)
-    {
-      dbContext.Contributors.Add(new Contributor(ContributorName.From($"Contributor {i}")));
-    }
+    perawat.UpdateRole(UserRoleEnum.Perawat);
+
+    var doctor = User.Create(
+        fullName: "Dr. Andi",
+        email: "doctor@klinik.com",
+        passwordHash: "Doctor123!"
+    );
+
+    doctor.UpdateRole(UserRoleEnum.Dokter);
+
+
+
+
+    dbContext.Users.AddRange(perawat, doctor);
+
     await dbContext.SaveChangesAsync();
   }
 }

@@ -1,5 +1,5 @@
-﻿using KlinikGigiV2.Core.ContributorAggregate;
+﻿// using KlinikGigiV2.Core.ContributorAggregate;
 
-namespace KlinikGigiV2.UseCases.Contributors.Update;
+// namespace KlinikGigiV2.UseCases.Contributors.Update;
 
-public record UpdateContributorCommand(ContributorId ContributorId, ContributorName NewName) : ICommand<Result<ContributorDto>>;
+// public record UpdateContributorCommand(ContributorId ContributorId, ContributorName NewName) : ICommand<Result<ContributorDto>>;
