@@ -10,6 +10,7 @@ public class Create(
     public override void Configure()
     {
         Post(CreateUserRequest.Route);
+        AllowAnonymous();
 
     }
 

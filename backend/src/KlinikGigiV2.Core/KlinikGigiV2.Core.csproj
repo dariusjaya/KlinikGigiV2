@@ -10,8 +10,9 @@
     <PackageReference Include="Ardalis.SharedKernel" />
     <PackageReference Include="Ardalis.SmartEnum" />
     <PackageReference Include="Ardalis.Specification" />
-    <PackageReference Include="Mediator.Abstractions" />
+    <PackageReference Include="Blake3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="SimpleBase" />
     <PackageReference Include="Vogen" />
   </ItemGroup>
 

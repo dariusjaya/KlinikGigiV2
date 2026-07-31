@@ -1,6 +1,6 @@
 
 using KlinikGigiV2.Core.MedicalRecordAggregate;
-
+using Ardalis.GuardClauses;
 namespace KlinikGigiV2.Core.UserAggregate;
 
 public class User : EntityBase<Guid>, IAggregateRoot, IAuditableEntity, IHasDomainEvents
