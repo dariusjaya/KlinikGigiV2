@@ -1,9 +1,0 @@
-﻿global using System.Runtime.CompilerServices;
-global using Ardalis.SharedKernel;
-global using KlinikGigiV2.Core.UserAggregate;
-global using KlinikGigiV2.UseCases.Users.Create;
-global using Shouldly;
-global using Mediator;
-global using Microsoft.Extensions.Logging;
-global using NSubstitute;
-global using Xunit;

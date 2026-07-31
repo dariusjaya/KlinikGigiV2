@@ -8,16 +8,32 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "generate:api": "tsx openapi-ts.config.ts"
+    "generate:openapi": "node ./openapi.config.ts"
   },
   "dependencies": {
-    "nuxt": "^4.5.1",
-    "vue": "^3.5.40",
-    "vue-router": "^5.2.0"
+    "@nuxt/ui": "^4.10.0",
+    "@pinia/colada": "^1.4.2",
+    "@pinia/colada-nuxt": "1.0.2",
+    "@pinia/nuxt": "1.0.1",
+    "@vueuse/core": "^14.3.0",
+    "h3": "1.15.11",
+    "nuxt": "^4.4.8",
+    "nuxt-charts": "^2.2.0",
+    "pinia": "^4.0.2",
+    "reka-ui": "^2.10.1",
+    "tailwindcss": "^4.3.3",
+    "vee-validate": "5.0.0-beta.0",
+    "vue": "^3.5.39",
+    "vue-router": "^5.1.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.99.0",
-    "tsx": "^4.23.1",
-    "typescript": "5.6.3"
+    "@hey-api/openapi-ts": "0.99.0",
+    "@iconify-json/lucide": "^1.2.116",
+    "@iconify-json/ph": "^1.2.2",
+    "@pinia/colada-devtools": "^1.1.0",
+    "@types/node": "^26.1.1",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.3.7"
   }
 }

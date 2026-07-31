@@ -18,13 +18,5 @@
     <Project Path="src/KlinikGigiV2.UseCases/KlinikGigiV2.UseCases.csproj" />
     <Project Path="src/KlinikGigiV2.Web/KlinikGigiV2.Web.csproj" />
   </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/KlinikGigiV2.FunctionalTests/KlinikGigiV2.FunctionalTests.csproj">
-      <BuildDependency Project="src/KlinikGigiV2.Web/KlinikGigiV2.Web.csproj" />
-    </Project>
-    <Project Path="tests/KlinikGigiV2.IntegrationTests/KlinikGigiV2.IntegrationTests.csproj">
-      <BuildDependency Project="src/KlinikGigiV2.Infrastructure/KlinikGigiV2.Infrastructure.csproj" />
-    </Project>
-    <Project Path="tests/KlinikGigiV2.UnitTests/KlinikGigiV2.UnitTests.csproj" />
-  </Folder>
+  <Folder Name="/tests/" />
 </Solution>
