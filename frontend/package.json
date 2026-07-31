@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "generate:openapi": "openapi-ts"
+    "generate:api": "tsx openapi-ts.config.ts"
   },
   "dependencies": {
     "nuxt": "^4.5.1",
@@ -16,7 +16,8 @@
     "vue-router": "^5.2.0"
   },
   "devDependencies": {
-    "@hey-api/client-fetch": "^0.13.1",
-    "@hey-api/openapi-ts": "^0.99.0"
+    "@hey-api/openapi-ts": "^0.99.0",
+    "tsx": "^4.23.1",
+    "typescript": "5.6.3"
   }
 }
