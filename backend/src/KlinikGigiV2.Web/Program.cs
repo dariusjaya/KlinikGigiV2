@@ -1,4 +1,6 @@
 ﻿using KlinikGigiV2.Web.Configurations;
+using FastEndpoints.Security;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,13 @@ startupLogger.LogInformation("Starting web host");
 
 builder.Services.AddOptionConfigs(builder.Configuration, startupLogger, builder);
 builder.Services.AddServiceConfigs(startupLogger, builder);
+
+// JWT Authentication
+builder.Services.AddAuthenticationJwtBearer(o =>
+{
+  o.SigningKey = builder.Configuration["Jwt:Key"];
+});
+builder.Services.AddAuthorization();
 
 builder.Services.AddFastEndpoints()
                 .SwaggerDocument(o =>
@@ -25,6 +34,9 @@ builder.Services.AddFastEndpoints()
                 });
 
 var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.UseAppMiddlewareAndSeedDatabase();
 

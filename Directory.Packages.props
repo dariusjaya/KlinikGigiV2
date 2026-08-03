@@ -17,9 +17,10 @@
     <PackageVersion Include="Blake3" Version="3.0.2" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="ErrorOr" Version="2.1.1" />
-    <PackageVersion Include="FastEndpoints" Version="7.1.1" />
-    <PackageVersion Include="FastEndpoints.ApiExplorer" Version="2.2.0" />
-    <PackageVersion Include="FastEndpoints.Swagger" Version="7.1.1" />
+    <PackageVersion Include="FastEndpoints" Version="8.2.0" />
+    <PackageVersion Include="FastEndpoints.ApiExplorer" Version="8.2.0" />
+    <PackageVersion Include="FastEndpoints.Security" Version="8.2.0" />
+    <PackageVersion Include="FastEndpoints.Swagger" Version="8.2.0" />
     <PackageVersion Include="MailKit" Version="4.16.0" />
     <PackageVersion Include="Mediator" Version="1.0.2123" />
     <PackageVersion Include="Mediator.Abstractions" Version="3.0.2" />
@@ -34,7 +35,7 @@
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.4" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.9" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="NimblePros.Metronome" Version="0.4.1" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />

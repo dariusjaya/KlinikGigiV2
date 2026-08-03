@@ -15,7 +15,7 @@ public class List(IMediator _mediator) : Endpoint<ListPatientRequest, ListPatien
     public override void Configure()
     {
         Get(ListPatientRequest.Route);
-        AllowAnonymous();
+
 
     }
 

@@ -10,8 +10,6 @@ public class Create(
     public override void Configure()
     {
         Post(CreatePatientRequest.Route);
-        AllowAnonymous();
-
     }
 
     public override async Task HandleAsync(CreatePatientRequest req, CancellationToken ct)

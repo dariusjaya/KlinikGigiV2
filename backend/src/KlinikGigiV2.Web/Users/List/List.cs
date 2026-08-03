@@ -15,7 +15,7 @@ public class List(IMediator _mediator) : Endpoint<ListUserRequest, ListUserRespo
     public override void Configure()
     {
         Get(ListUserRequest.Route);
-        AllowAnonymous();
+
 
     }
 

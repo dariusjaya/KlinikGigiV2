@@ -8,7 +8,7 @@ public class Update(IMediator _mediator) : Endpoint<UpdatePatientRequest, Update
     public override void Configure()
     {
         Put(UpdatePatientRequest.Route);
-        AllowAnonymous();
+
     }
 
     public override async Task HandleAsync(UpdatePatientRequest req, CancellationToken ct)

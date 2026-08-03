@@ -10,7 +10,7 @@ public class Get(IMediator _mediator) : Endpoint<GetPatientRequest, GetPatientRe
     public override void Configure()
     {
         Get(GetPatientRequest.Route);
-        AllowAnonymous();
+
 
     }
 
