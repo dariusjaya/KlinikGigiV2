@@ -3,6 +3,8 @@
   <ItemGroup>
     <PackageReference Include="Ardalis.Result" />
     <PackageReference Include="ErrorOr" />
+    <PackageReference Include="FastEndpoints" />
+    <PackageReference Include="FastEndpoints.Security" />
   </ItemGroup>
 
   <ItemGroup>
