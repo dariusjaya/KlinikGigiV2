@@ -4,7 +4,7 @@ using KlinikGigiV2.Core.UserAggregate;
 
 namespace KlinikGigiV2.Core.MedicalRecordAggregate;
 
-public class MedicalRecord : EntityBase<Guid>, IAuditableEntity
+public class MedicalRecord : EntityBase<Guid>, IAuditableEntity, IAggregateRoot
 {
     public Guid PatientId { get; private set; }
     public DateOnly VisitDate { get; private set; }
