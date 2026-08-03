@@ -8,7 +8,7 @@ public class Login(IMediator _mediator) : Endpoint<LoginRequest, LoginResponse>
     public override void Configure()
     {
         Post(LoginRequest.Route);
-
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(LoginRequest req, CancellationToken ct)

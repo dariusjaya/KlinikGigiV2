@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { KlinikGigiV2WebUsersCreateCreateData, KlinikGigiV2WebUsersCreateCreateErrors, KlinikGigiV2WebUsersCreateCreateResponses } from './types.gen';
+import type { KlinikGigiV2WebAuthLoginLoginData, KlinikGigiV2WebAuthLoginLoginErrors, KlinikGigiV2WebAuthLoginLoginResponses, KlinikGigiV2WebMedicalRecordsCreateCreateData, KlinikGigiV2WebMedicalRecordsCreateCreateErrors, KlinikGigiV2WebMedicalRecordsCreateCreateResponses, KlinikGigiV2WebMedicalRecordsGetGetData, KlinikGigiV2WebMedicalRecordsGetGetErrors, KlinikGigiV2WebMedicalRecordsGetGetResponses, KlinikGigiV2WebMedicalRecordsListListData, KlinikGigiV2WebMedicalRecordsListListErrors, KlinikGigiV2WebMedicalRecordsListListResponses, KlinikGigiV2WebPatientsCreateCreateData, KlinikGigiV2WebPatientsCreateCreateErrors, KlinikGigiV2WebPatientsCreateCreateResponses, KlinikGigiV2WebPatientsGetGetData, KlinikGigiV2WebPatientsGetGetErrors, KlinikGigiV2WebPatientsGetGetResponses, KlinikGigiV2WebPatientsListListData, KlinikGigiV2WebPatientsListListErrors, KlinikGigiV2WebPatientsListListResponses, KlinikGigiV2WebPatientsUpdateUpdateData, KlinikGigiV2WebPatientsUpdateUpdateErrors, KlinikGigiV2WebPatientsUpdateUpdateResponses, KlinikGigiV2WebUsersCreateCreateData, KlinikGigiV2WebUsersCreateCreateErrors, KlinikGigiV2WebUsersCreateCreateResponses, KlinikGigiV2WebUsersListListData, KlinikGigiV2WebUsersListListErrors, KlinikGigiV2WebUsersListListResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -18,9 +18,94 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
     meta?: keyof ClientMeta extends never ? Record<string, unknown> : ClientMeta;
 };
 
+/**
+ * List all User
+ *
+ * List all accounts - returns UserListResponse within the application.
+ */
+export const klinikGigiV2WebUsersListList = <ThrowOnError extends boolean = false>(options?: Options<KlinikGigiV2WebUsersListListData, ThrowOnError>): RequestResult<KlinikGigiV2WebUsersListListResponses, KlinikGigiV2WebUsersListListErrors, ThrowOnError> => (options?.client ?? client).get<KlinikGigiV2WebUsersListListResponses, KlinikGigiV2WebUsersListListErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/users',
+    ...options
+});
+
 export const klinikGigiV2WebUsersCreateCreate = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebUsersCreateCreateData, ThrowOnError>): RequestResult<KlinikGigiV2WebUsersCreateCreateResponses, KlinikGigiV2WebUsersCreateCreateErrors, ThrowOnError> => (options.client ?? client).post<KlinikGigiV2WebUsersCreateCreateResponses, KlinikGigiV2WebUsersCreateCreateErrors, ThrowOnError>({
     security: [{ scheme: 'bearer', type: 'http' }],
     url: '/klinik/users',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const klinikGigiV2WebPatientsGetGet = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebPatientsGetGetData, ThrowOnError>): RequestResult<KlinikGigiV2WebPatientsGetGetResponses, KlinikGigiV2WebPatientsGetGetErrors, ThrowOnError> => (options.client ?? client).get<KlinikGigiV2WebPatientsGetGetResponses, KlinikGigiV2WebPatientsGetGetErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/patients/{patientId}',
+    ...options
+});
+
+export const klinikGigiV2WebPatientsUpdateUpdate = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebPatientsUpdateUpdateData, ThrowOnError>): RequestResult<KlinikGigiV2WebPatientsUpdateUpdateResponses, KlinikGigiV2WebPatientsUpdateUpdateErrors, ThrowOnError> => (options.client ?? client).put<KlinikGigiV2WebPatientsUpdateUpdateResponses, KlinikGigiV2WebPatientsUpdateUpdateErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/patients/{patientId}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * List all Patient
+ *
+ * List all patients - returns PatientListResponse within the application.
+ */
+export const klinikGigiV2WebPatientsListList = <ThrowOnError extends boolean = false>(options?: Options<KlinikGigiV2WebPatientsListListData, ThrowOnError>): RequestResult<KlinikGigiV2WebPatientsListListResponses, KlinikGigiV2WebPatientsListListErrors, ThrowOnError> => (options?.client ?? client).get<KlinikGigiV2WebPatientsListListResponses, KlinikGigiV2WebPatientsListListErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/patients',
+    ...options
+});
+
+export const klinikGigiV2WebPatientsCreateCreate = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebPatientsCreateCreateData, ThrowOnError>): RequestResult<KlinikGigiV2WebPatientsCreateCreateResponses, KlinikGigiV2WebPatientsCreateCreateErrors, ThrowOnError> => (options.client ?? client).post<KlinikGigiV2WebPatientsCreateCreateResponses, KlinikGigiV2WebPatientsCreateCreateErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/patients',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * List all Medical Records
+ *
+ * List all medical records for a specific patient - returns MedicalRecordListResponse within the application.
+ */
+export const klinikGigiV2WebMedicalRecordsListList = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebMedicalRecordsListListData, ThrowOnError>): RequestResult<KlinikGigiV2WebMedicalRecordsListListResponses, KlinikGigiV2WebMedicalRecordsListListErrors, ThrowOnError> => (options.client ?? client).get<KlinikGigiV2WebMedicalRecordsListListResponses, KlinikGigiV2WebMedicalRecordsListListErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/patients/{patientId}/medical-records',
+    ...options
+});
+
+export const klinikGigiV2WebMedicalRecordsCreateCreate = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebMedicalRecordsCreateCreateData, ThrowOnError>): RequestResult<KlinikGigiV2WebMedicalRecordsCreateCreateResponses, KlinikGigiV2WebMedicalRecordsCreateCreateErrors, ThrowOnError> => (options.client ?? client).post<KlinikGigiV2WebMedicalRecordsCreateCreateResponses, KlinikGigiV2WebMedicalRecordsCreateCreateErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/patients/{patientId}/medical-records',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const klinikGigiV2WebMedicalRecordsGetGet = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebMedicalRecordsGetGetData, ThrowOnError>): RequestResult<KlinikGigiV2WebMedicalRecordsGetGetResponses, KlinikGigiV2WebMedicalRecordsGetGetErrors, ThrowOnError> => (options.client ?? client).get<KlinikGigiV2WebMedicalRecordsGetGetResponses, KlinikGigiV2WebMedicalRecordsGetGetErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/patients/{patientId}/medical-records/{medicalRecordId}',
+    ...options
+});
+
+export const klinikGigiV2WebAuthLoginLogin = <ThrowOnError extends boolean = false>(options: Options<KlinikGigiV2WebAuthLoginLoginData, ThrowOnError>): RequestResult<KlinikGigiV2WebAuthLoginLoginResponses, KlinikGigiV2WebAuthLoginLoginErrors, ThrowOnError> => (options.client ?? client).post<KlinikGigiV2WebAuthLoginLoginResponses, KlinikGigiV2WebAuthLoginLoginErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/klinik/auth/login',
     ...options,
     headers: {
         'Content-Type': 'application/json',

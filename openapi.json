@@ -1,5 +1,5 @@
 {
-    "x-generator": "NSwag v14.6.2.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))",
+    "x-generator": "NSwag v14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))",
     "openapi": "3.0.0",
     "info": {
         "title": "KlinikGigiV2 API",
@@ -13,6 +13,62 @@
     ],
     "paths": {
         "/klinik/users": {
+            "get": {
+                "tags": [
+                    "Klinik"
+                ],
+                "summary": "List all User",
+                "description": "List all accounts - returns UserListResponse within the application.",
+                "operationId": "KlinikGigiV2WebUsersListList",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListUserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Klinik"
@@ -52,11 +108,414 @@
                     }
                 ]
             }
+        },
+        "/klinik/patients/{patientId}": {
+            "put": {
+                "tags": [
+                    "Klinik"
+                ],
+                "operationId": "KlinikGigiV2WebPatientsUpdateUpdate",
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "x-name": "UpdatePatientRequest",
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePatientRequest"
+                            }
+                        }
+                    },
+                    "required": true,
+                    "x-position": 1
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdatePatientResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Klinik"
+                ],
+                "operationId": "KlinikGigiV2WebPatientsGetGet",
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPatientResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/klinik/patients": {
+            "get": {
+                "tags": [
+                    "Klinik"
+                ],
+                "summary": "List all Patient",
+                "description": "List all patients - returns PatientListResponse within the application.",
+                "operationId": "KlinikGigiV2WebPatientsListList",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListPatientResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Klinik"
+                ],
+                "operationId": "KlinikGigiV2WebPatientsCreateCreate",
+                "requestBody": {
+                    "x-name": "CreatePatientRequest",
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePatientRequest"
+                            }
+                        }
+                    },
+                    "required": true,
+                    "x-position": 1
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreatePatientResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/klinik/patients/{patientId}/medical-records": {
+            "get": {
+                "tags": [
+                    "Klinik"
+                ],
+                "summary": "List all Medical Records",
+                "description": "List all medical records for a specific patient - returns MedicalRecordListResponse within the application.",
+                "operationId": "KlinikGigiV2WebMedicalRecordsListList",
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListMedicalRecordResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Klinik"
+                ],
+                "operationId": "KlinikGigiV2WebMedicalRecordsCreateCreate",
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "x-name": "CreateMedicalRecordRequest",
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMedicalRecordRequest"
+                            }
+                        }
+                    },
+                    "required": true,
+                    "x-position": 1
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateMedicalRecordResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/klinik/patients/{patientId}/medical-records/{medicalRecordId}": {
+            "get": {
+                "tags": [
+                    "Klinik"
+                ],
+                "operationId": "KlinikGigiV2WebMedicalRecordsGetGet",
+                "parameters": [
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    },
+                    {
+                        "name": "medicalRecordId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "guid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetMedicalRecordResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/klinik/auth/login": {
+            "post": {
+                "tags": [
+                    "Klinik"
+                ],
+                "operationId": "KlinikGigiV2WebAuthLoginLogin",
+                "requestBody": {
+                    "x-name": "LoginRequest",
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    },
+                    "required": true,
+                    "x-position": 1
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
         "schemas": {
-            "CreateUserResponse": {
+            "ListUserResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PaginatedResponseOfUserRecord"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "PaginatedResponseOfUserRecord": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/GenericResponse"
@@ -65,13 +524,24 @@
                         "type": "object",
                         "additionalProperties": false,
                         "properties": {
-                            "user": {
+                            "items": {
+                                "type": "array",
                                 "nullable": true,
-                                "oneOf": [
-                                    {
-                                        "$ref": "#/components/schemas/UserRecord"
-                                    }
-                                ]
+                                "items": {
+                                    "$ref": "#/components/schemas/UserRecord"
+                                }
+                            },
+                            "totalItems": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "page": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "pageSize": {
+                                "type": "integer",
+                                "format": "int32"
                             }
                         }
                     }
@@ -117,6 +587,31 @@
                     "error": {}
                 }
             },
+            "ListUserRequest": {
+                "type": "object",
+                "additionalProperties": false
+            },
+            "CreateUserResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "user": {
+                                "nullable": true,
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/UserRecord"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
             "CreateUserRequest": {
                 "type": "object",
                 "additionalProperties": false,
@@ -128,6 +623,389 @@
                         "type": "string"
                     },
                     "passwordHash": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdatePatientResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "patient": {
+                                "nullable": true,
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/PatientRecord"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "PatientRecord": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "guid"
+                    },
+                    "medicalRecordNo": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "occupation": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdatePatientRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "occupation": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ListPatientResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PaginatedResponseOfPatientRecord"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "PaginatedResponseOfPatientRecord": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "items": {
+                                "type": "array",
+                                "nullable": true,
+                                "items": {
+                                    "$ref": "#/components/schemas/PatientRecord"
+                                }
+                            },
+                            "totalItems": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "page": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "pageSize": {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ListPatientRequest": {
+                "type": "object",
+                "additionalProperties": false
+            },
+            "GetPatientResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "patient": {
+                                "nullable": true,
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/PatientRecord"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "GetPatientRequest": {
+                "type": "object",
+                "additionalProperties": false
+            },
+            "CreatePatientResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "patient": {
+                                "nullable": true,
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/PatientRecord"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "CreatePatientRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "medicalRecordNo": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "occupation": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ListMedicalRecordResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PaginatedResponseOfMedicalRecordRecord"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "PaginatedResponseOfMedicalRecordRecord": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "items": {
+                                "type": "array",
+                                "nullable": true,
+                                "items": {
+                                    "$ref": "#/components/schemas/MedicalRecordRecord"
+                                }
+                            },
+                            "totalItems": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "page": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "pageSize": {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                ]
+            },
+            "MedicalRecordRecord": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "guid"
+                    },
+                    "patientId": {
+                        "type": "string",
+                        "format": "guid"
+                    },
+                    "diagnosis": {
+                        "type": "string"
+                    },
+                    "visitDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "notes": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "therapy": {
+                        "type": "string"
+                    },
+                    "createdByUserId": {
+                        "type": "string",
+                        "format": "guid"
+                    }
+                }
+            },
+            "ListMedicalRecordRequest": {
+                "type": "object",
+                "additionalProperties": false
+            },
+            "GetMedicalRecordResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "medicalRecord": {
+                                "nullable": true,
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/MedicalRecordRecord"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "GetMedicalRecordRequest": {
+                "type": "object",
+                "additionalProperties": false
+            },
+            "CreateMedicalRecordResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "medicalRecord": {
+                                "nullable": true,
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/MedicalRecordRecord"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "CreateMedicalRecordRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "createdByUserId": {
+                        "type": "string",
+                        "format": "guid"
+                    },
+                    "diagnosis": {
+                        "type": "string"
+                    },
+                    "therapy": {
+                        "type": "string"
+                    },
+                    "visitDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "LoginResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GenericResponse"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "token": {
+                                "type": "string",
+                                "nullable": true
+                            },
+                            "user": {
+                                "nullable": true,
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/UserRecord"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "LoginRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
                         "type": "string"
                     }
                 }
