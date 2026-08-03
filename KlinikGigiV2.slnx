@@ -4,6 +4,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path=".template.config/template.json" />
@@ -11,12 +12,12 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
-  <Folder Name="/src/">
-    <Project Path="src/KlinikGigiV2.Core/KlinikGigiV2.Core.csproj" />
-    <Project Path="src/KlinikGigiV2.Infrastructure/KlinikGigiV2.Infrastructure.csproj" />
-    <Project Path="src/KlinikGigiV2.SharedKernel/KlinikGigiV2.SharedKernel.csproj" />
-    <Project Path="src/KlinikGigiV2.UseCases/KlinikGigiV2.UseCases.csproj" />
-    <Project Path="src/KlinikGigiV2.Web/KlinikGigiV2.Web.csproj" />
+
+  <Folder Name="/backend/src/">
+    <Project Path="backend/src/KlinikGigiV2.Core/KlinikGigiV2.Core.csproj" />
+    <Project Path="backend/src/KlinikGigiV2.Infrastructure/KlinikGigiV2.Infrastructure.csproj" />
+    <Project Path="backend/src/KlinikGigiV2.SharedKernel/KlinikGigiV2.SharedKernel.csproj" />
+    <Project Path="backend/src/KlinikGigiV2.UseCases/KlinikGigiV2.UseCases.csproj" />
+    <Project Path="backend/src/KlinikGigiV2.Web/KlinikGigiV2.Web.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
 </Solution>
