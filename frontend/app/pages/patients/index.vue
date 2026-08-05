@@ -10,6 +10,11 @@ const loading = ref(true);
 const search = ref('');
 const isModalOpen = ref(false);
 const creating = ref(false);
+const errorMessage = ref('');
+
+const page = ref(1);
+const pageSize = ref(10);
+const totalItems = ref(0);
 
 const form = reactive({
   medicalRecordNo: '',
@@ -23,25 +28,35 @@ const form = reactive({
 async function fetchPatients() {
   loading.value = true;
   const { data } = await klinikGigiV2WebPatientsListList({
-    query: { search: search.value || null },
+    query: {
+      search: search.value || null,
+      page: page.value,
+      pagesize: pageSize.value,
+    },
   });
-  patients.value = data?.items ?? [];
+    patients.value = data?.items ?? [];
+    totalItems.value = data?.totalItems ?? 0;
+
   loading.value = false;
 }
 
 async function handleCreate() {
+  errorMessage.value = '';
   creating.value = true;
   const { data, error } = await klinikGigiV2WebPatientsCreateCreate({ body: form });
   creating.value = false;
 
-  if (!error) {
-    isModalOpen.value = false;
-    Object.assign(form, {
-      medicalRecordNo: '', fullName: '', birthDate: '',
-      occupation: '', address: '', phone: '',
-    });
-    await fetchPatients();
+  if (error) {
+    errorMessage.value = (error as any)?.message ?? 'Gagal menambahkan pasien.';
+    return;
   }
+
+  isModalOpen.value = false;
+  Object.assign(form, {
+    medicalRecordNo: '', fullName: '', birthDate: '',
+    occupation: '', address: '', phone: '',
+  });
+  await fetchPatients();
 }
 
 const columns = [
@@ -58,13 +73,32 @@ watch(search, () => {
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(fetchPatients, 400);
 });
+
+function openCreateModal() {
+  errorMessage.value = '';
+  Object.assign(form, {
+    medicalRecordNo: '', fullName: '', birthDate: '',
+    occupation: '', address: '', phone: '',
+  });
+  isModalOpen.value = true;
+}
+
+watch(search, () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    page.value = 1;
+    fetchPatients();
+  }, 400);
+});
+
+watch(page, fetchPatients);
 </script>
 
 <template>
   <div>
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-semibold">Data Pasien</h1>
-      <UButton icon="i-lucide-plus" @click="isModalOpen = true">
+    <UButton icon="i-lucide-plus" @click="openCreateModal">
         Tambah Pasien
       </UButton>
     </div>
@@ -76,18 +110,31 @@ watch(search, () => {
       class="mb-4 w-full max-w-sm"
     />
 
-    <UCard>
-      <UTable :data="patients" :columns="columns" :loading="loading">
-        <template #fullName-cell="{ row }">
-          <NuxtLink
-            :to="`/patients/${row.original.id}`"
-            class="text-primary-500 hover:underline font-medium"
-          >
-            {{ row.original.fullName }}
-          </NuxtLink>
-        </template>
-      </UTable>
-    </UCard>
+   <UCard>
+  <UTable :data="patients" :columns="columns" :loading="loading">
+    <template #fullName-cell="{ row }">
+      <NuxtLink
+        :to="`/patients/${row.original.id}`"
+        class="text-primary-500 hover:underline font-medium"
+      >
+        {{ row.original.fullName }}
+      </NuxtLink>
+    </template>
+  </UTable>
+
+  <template #footer>
+    <div class="flex justify-between items-center">
+      <p class="text-sm text-gray-500">
+        Menampilkan {{ patients.length }} dari {{ totalItems }} pasien
+      </p>
+      <UPagination
+        v-model:page="page"
+        :total="totalItems"
+        :items-per-page="pageSize"
+      />
+    </div>
+  </template>
+</UCard>
 
     <UModal v-model:open="isModalOpen" title="Tambah Pasien Baru">
       <template #body>
@@ -111,9 +158,16 @@ watch(search, () => {
             <UInput v-model="form.phone" class="w-full" />
           </UFormField>
 
+          <UAlert
+            v-if="errorMessage"
+            color="error"
+            variant="soft"
+            :title="errorMessage"
+        />
+
           <div class="flex justify-end gap-2 pt-2">
-            <UButton color="neutral" variant="ghost" @click="isModalOpen = false">
-              Batal
+          <UButton color="neutral" variant="ghost" @click="isModalOpen = false; errorMessage = ''">
+            Batal
             </UButton>
             <UButton type="submit" :loading="creating">
               Simpan
