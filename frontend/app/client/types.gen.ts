@@ -97,13 +97,8 @@ export type CreatePatientRequest = {
     phone?: string;
 };
 
-export type ListMedicalRecordResponse = PaginatedResponseOfMedicalRecordRecord & {};
-
-export type PaginatedResponseOfMedicalRecordRecord = GenericResponse & {
-    items?: Array<MedicalRecordRecord> | null;
-    totalItems?: number;
-    page?: number;
-    pageSize?: number;
+export type UpdateMedicalRecordResponse = GenericResponse & {
+    medicalRecord?: MedicalRecordRecord | null;
 };
 
 export type MedicalRecordRecord = {
@@ -116,6 +111,22 @@ export type MedicalRecordRecord = {
     createdByUserId?: string;
 };
 
+export type UpdateMedicalRecordRequest = {
+    visitDate?: string;
+    diagnosis?: string;
+    therapy?: string;
+    notes?: string | null;
+};
+
+export type ListMedicalRecordResponse = PaginatedResponseOfMedicalRecordRecord & {};
+
+export type PaginatedResponseOfMedicalRecordRecord = GenericResponse & {
+    items?: Array<MedicalRecordRecord> | null;
+    totalItems?: number;
+    page?: number;
+    pageSize?: number;
+};
+
 export type ListMedicalRecordRequest = {
     [key: string]: never;
 };
@@ -125,6 +136,12 @@ export type GetMedicalRecordResponse = GenericResponse & {
 };
 
 export type GetMedicalRecordRequest = {
+    [key: string]: never;
+};
+
+export type DeleteMedicalRecordResponse = GenericResponse & {};
+
+export type DeleteMedicalRecordRequest = {
     [key: string]: never;
 };
 
@@ -300,6 +317,84 @@ export type KlinikGigiV2WebPatientsCreateCreateResponses = {
 
 export type KlinikGigiV2WebPatientsCreateCreateResponse = KlinikGigiV2WebPatientsCreateCreateResponses[keyof KlinikGigiV2WebPatientsCreateCreateResponses];
 
+export type KlinikGigiV2WebMedicalRecordsDeleteDeleteData = {
+    body?: never;
+    path: {
+        patientId: string;
+        medicalRecordId: string;
+    };
+    query?: never;
+    url: '/klinik/patients/{patientId}/medical-records/{medicalRecordId}';
+};
+
+export type KlinikGigiV2WebMedicalRecordsDeleteDeleteErrors = {
+    /**
+     * Unauthorized
+     */
+    401: unknown;
+};
+
+export type KlinikGigiV2WebMedicalRecordsDeleteDeleteResponses = {
+    /**
+     * Success
+     */
+    200: DeleteMedicalRecordResponse;
+};
+
+export type KlinikGigiV2WebMedicalRecordsDeleteDeleteResponse = KlinikGigiV2WebMedicalRecordsDeleteDeleteResponses[keyof KlinikGigiV2WebMedicalRecordsDeleteDeleteResponses];
+
+export type KlinikGigiV2WebMedicalRecordsGetGetData = {
+    body?: never;
+    path: {
+        patientId: string;
+        medicalRecordId: string;
+    };
+    query?: never;
+    url: '/klinik/patients/{patientId}/medical-records/{medicalRecordId}';
+};
+
+export type KlinikGigiV2WebMedicalRecordsGetGetErrors = {
+    /**
+     * Unauthorized
+     */
+    401: unknown;
+};
+
+export type KlinikGigiV2WebMedicalRecordsGetGetResponses = {
+    /**
+     * Success
+     */
+    200: GetMedicalRecordResponse;
+};
+
+export type KlinikGigiV2WebMedicalRecordsGetGetResponse = KlinikGigiV2WebMedicalRecordsGetGetResponses[keyof KlinikGigiV2WebMedicalRecordsGetGetResponses];
+
+export type KlinikGigiV2WebMedicalRecordsUpdateUpdateData = {
+    body: UpdateMedicalRecordRequest;
+    path: {
+        patientId: string;
+        medicalRecordId: string;
+    };
+    query?: never;
+    url: '/klinik/patients/{patientId}/medical-records/{medicalRecordId}';
+};
+
+export type KlinikGigiV2WebMedicalRecordsUpdateUpdateErrors = {
+    /**
+     * Unauthorized
+     */
+    401: unknown;
+};
+
+export type KlinikGigiV2WebMedicalRecordsUpdateUpdateResponses = {
+    /**
+     * Success
+     */
+    200: UpdateMedicalRecordResponse;
+};
+
+export type KlinikGigiV2WebMedicalRecordsUpdateUpdateResponse = KlinikGigiV2WebMedicalRecordsUpdateUpdateResponses[keyof KlinikGigiV2WebMedicalRecordsUpdateUpdateResponses];
+
 export type KlinikGigiV2WebMedicalRecordsListListData = {
     body?: never;
     path: {
@@ -354,44 +449,11 @@ export type KlinikGigiV2WebMedicalRecordsCreateCreateResponses = {
 
 export type KlinikGigiV2WebMedicalRecordsCreateCreateResponse = KlinikGigiV2WebMedicalRecordsCreateCreateResponses[keyof KlinikGigiV2WebMedicalRecordsCreateCreateResponses];
 
-export type KlinikGigiV2WebMedicalRecordsGetGetData = {
-    body?: never;
-    path: {
-        patientId: string;
-        medicalRecordId: string;
-    };
-    query?: never;
-    url: '/klinik/patients/{patientId}/medical-records/{medicalRecordId}';
-};
-
-export type KlinikGigiV2WebMedicalRecordsGetGetErrors = {
-    /**
-     * Unauthorized
-     */
-    401: unknown;
-};
-
-export type KlinikGigiV2WebMedicalRecordsGetGetResponses = {
-    /**
-     * Success
-     */
-    200: GetMedicalRecordResponse;
-};
-
-export type KlinikGigiV2WebMedicalRecordsGetGetResponse = KlinikGigiV2WebMedicalRecordsGetGetResponses[keyof KlinikGigiV2WebMedicalRecordsGetGetResponses];
-
 export type KlinikGigiV2WebAuthLoginLoginData = {
     body: LoginRequest;
     path?: never;
     query?: never;
     url: '/klinik/auth/login';
-};
-
-export type KlinikGigiV2WebAuthLoginLoginErrors = {
-    /**
-     * Unauthorized
-     */
-    401: unknown;
 };
 
 export type KlinikGigiV2WebAuthLoginLoginResponses = {
