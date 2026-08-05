@@ -6,6 +6,7 @@ import {
 } from '~/client/sdk.gen';
 import type { PatientRecord, MedicalRecordRecord } from '~/client/types.gen';
 
+
 const route = useRoute();
 const patientId = route.params.id as string;
 
@@ -14,11 +15,6 @@ const records = ref<MedicalRecordRecord[]>([]);
 const loading = ref(true);
 const isModalOpen = ref(false);
 const creating = ref(false);
-const errorMessage = ref('');
-
-const page = ref(1);
-const pageSize = ref(10);
-const totalItems = ref(0);
 
 const form = reactive({
   visitDate: '',
@@ -27,49 +23,30 @@ const form = reactive({
   notes: '',
 });
 
-async function fetchPatient() {
-  const { data } = await klinikGigiV2WebPatientsGetGet({ path: { patientId } });
-  patient.value = data?.patient ?? null;
-}
-
-async function fetchRecords() {
+async function fetchData() {
   loading.value = true;
-  const { data } = await klinikGigiV2WebMedicalRecordsListList({
-    path: { patientId },
-    query: {
-      page: page.value,
-      pagesize: pageSize.value,
-    },
-  });
-  records.value = data?.items ?? [];
-  totalItems.value = data?.totalItems ?? 0;
+  const [patientRes, recordsRes] = await Promise.all([
+    klinikGigiV2WebPatientsGetGet({ path: { patientId } }),
+    klinikGigiV2WebMedicalRecordsListList({ path: { patientId } }),
+  ]);
+  patient.value = patientRes.data?.patient ?? null;
+  records.value = recordsRes.data?.items ?? [];
   loading.value = false;
 }
 
 async function handleCreate() {
-  errorMessage.value = '';
   creating.value = true;
-  const { data, error } = await klinikGigiV2WebMedicalRecordsCreateCreate({
+  const { error } = await klinikGigiV2WebMedicalRecordsCreateCreate({
     path: { patientId },
     body: form,
   });
   creating.value = false;
 
-  if (error) {
-    errorMessage.value = (error as any)?.message ?? 'Gagal menambahkan kunjungan.';
-    return;
+  if (!error) {
+    isModalOpen.value = false;
+    Object.assign(form, { visitDate: '', diagnosis: '', therapy: '', notes: '' });
+    await fetchData();
   }
-
-  isModalOpen.value = false;
-  Object.assign(form, { visitDate: '', diagnosis: '', therapy: '', notes: '' });
-  page.value = 1;
-  await fetchRecords();
-}
-
-function openCreateModal() {
-  errorMessage.value = '';
-  Object.assign(form, { visitDate: '', diagnosis: '', therapy: '', notes: '' });
-  isModalOpen.value = true;
 }
 
 const columns = [
@@ -79,12 +56,7 @@ const columns = [
   { accessorKey: 'notes', header: 'Catatan' },
 ];
 
-onMounted(async () => {
-  await fetchPatient();
-  await fetchRecords();
-});
-
-watch(page, fetchRecords);
+onMounted(fetchData);
 </script>
 
 <template>
@@ -106,26 +78,13 @@ watch(page, fetchRecords);
 
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-semibold">Riwayat Kunjungan</h2>
-      <UButton icon="i-lucide-plus" @click="openCreateModal">
+      <UButton icon="i-lucide-plus" @click="isModalOpen = true">
         Tambah Kunjungan
       </UButton>
     </div>
 
     <UCard>
       <UTable :data="records" :columns="columns" :loading="loading" />
-
-      <template #footer>
-        <div class="flex justify-between items-center">
-          <p class="text-sm text-gray-500">
-            Menampilkan {{ records.length }} dari {{ totalItems }} kunjungan
-          </p>
-          <UPagination
-            v-model:page="page"
-            :total="totalItems"
-            :items-per-page="pageSize"
-          />
-        </div>
-      </template>
     </UCard>
 
     <UModal v-model:open="isModalOpen" title="Tambah Kunjungan Baru">
@@ -144,15 +103,8 @@ watch(page, fetchRecords);
             <UTextarea v-model="form.notes" class="w-full" />
           </UFormField>
 
-          <UAlert
-            v-if="errorMessage"
-            color="error"
-            variant="soft"
-            :title="errorMessage"
-          />
-
           <div class="flex justify-end gap-2 pt-2">
-            <UButton color="neutral" variant="ghost" @click="isModalOpen = false; errorMessage = ''">
+            <UButton color="neutral" variant="ghost" @click="isModalOpen = false">
               Batal
             </UButton>
             <UButton type="submit" :loading="creating">
