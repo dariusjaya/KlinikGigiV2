@@ -12,14 +12,12 @@ public class ListMedicalRecordHandler(IRepository<MedicalRecord> repository) : I
     {
         public MedicalRecordListSpec(Guid patientId, string? search, int skip = 0, int take = 0)
         {
+            Query.Where(medicalRecord => medicalRecord.PatientId == patientId);
 
             if (!string.IsNullOrWhiteSpace(search))
             {
                 var lowerCaseSearch = search.ToLower();
-
-                Query
-                  .Where(medicalRecord => medicalRecord.PatientId == patientId)
-                  .Search(medicalRecord => medicalRecord.Diagnosis.ToLower(), $"%{lowerCaseSearch}%");
+                Query.Search(medicalRecord => medicalRecord.Diagnosis.ToLower(), $"%{lowerCaseSearch}%");
             }
 
             if (skip >= 0 && take > 0)
