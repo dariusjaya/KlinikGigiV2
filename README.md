@@ -80,7 +80,7 @@ dotnet ef database update \
 dotnet run --project src/KlinikGigiV2.Web
 ```
 
-API berjalan di `https://localhost:57679`, dokumentasi OpenAPI tersedia di `/openapi/v1.json`.
+API berjalan di `https://localhost:57679`, dokumentasi OpenAPI tersedia di `/openapi/v1.json`., swagger UI di `/swagger`.
 
 ### 3. Frontend
 
@@ -89,7 +89,7 @@ cd frontend
 pnpm install
 
 # Generate TypeScript client dari OpenAPI spec backend
-pnpm generate:api
+pnpm generate:openapi
 
 # Jalankan dev server
 pnpm dev
@@ -134,7 +134,7 @@ Setiap kali ada perubahan pada backend (endpoint baru, ubah schema), frontend cu
 dotnet run --project backend/src/KlinikGigiV2.Web
 
 # 2. Generate ulang client di frontend
-cd frontend && pnpm generate:api
+cd frontend && pnpm generate:openapi
 ```
 
 ---
